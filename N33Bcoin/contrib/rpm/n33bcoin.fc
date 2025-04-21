@@ -1,0 +1,8 @@
+/usr/bin/n33bcoin-cli		--	gen_context(system_u:object_r:n33bcoin_exec_t,s0)
+/usr/sbin/n33bcoind		--	gen_context(system_u:object_r:n33bcoin_exec_t,s0)
+/usr/lib(64)?/n33bcoin/n33bcoind		--	gen_context(system_u:object_r:n33bcoin_exec_t,s0)
+
+/etc/n33bcoin(/.*)?		gen_context(system_u:object_r:n33bcoin_conf_t,s0)
+/var/lib/n33bcoin(/.*)?		gen_context(system_u:object_r:n33bcoin_var_lib_t,s0)
+
+(/var)?/run/n33bcoind(/.*)?   gen_context(system_u:object_r:n33bcoin_var_run_t,s0)

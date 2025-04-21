@@ -1,0 +1,33 @@
+# /etc/conf.d/n33bcoind: config file for /etc/init.d/n33bcoind
+
+# Config file location
+#BITCOIND_CONFIGFILE="/etc/n33bcoin/n33bcoin.conf"
+
+# What directory to write pidfile to?  (created and owned by $BITCOIND_USER)
+#BITCOIND_PIDDIR="/var/run/n33bcoind"
+
+# What filename to give the pidfile
+#BITCOIND_PIDFILE="${BITCOIND_PIDDIR}/n33bcoind.pid"
+
+# Where to write n33bcoind data (be mindful that the blockchain is large)
+#BITCOIND_DATADIR="/var/lib/n33bcoind"
+
+# User and group to own n33bcoind process
+#BITCOIND_USER="n33bcoin"
+#BITCOIND_GROUP="n33bcoin"
+
+# Path to n33bcoind executable
+#BITCOIND_BIN="/usr/bin/n33bcoind"
+
+# Nice value to run n33bcoind under
+#BITCOIND_NICE=0
+
+# Additional options (avoid -conf and -datadir, use flags above)
+#BITCOIND_OPTS=""
+
+# The timeout in seconds OpenRC will wait for n33bcoind to terminate
+# after a SIGTERM has been raised.
+# Note that this will be mapped as argument to start-stop-daemon's
+# '--retry' option, which means you can specify a retry schedule
+# here. For more information see man 8 start-stop-daemon.
+BITCOIND_SIGTERM_TIMEOUT=60

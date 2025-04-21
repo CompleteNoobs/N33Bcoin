@@ -1,0 +1,81 @@
+policy_module(n33bcoin, 1.100.1)
+
+########################################
+#
+# Declarations
+#
+
+type n33bcoin_t;
+type n33bcoin_exec_t;
+init_daemon_domain(n33bcoin_t, n33bcoin_exec_t)
+
+permissive n33bcoin_t;
+
+type n33bcoin_initrc_exec_t;
+init_script_file(n33bcoin_initrc_exec_t)
+
+type n33bcoin_conf_t;
+files_type(n33bcoin_conf_t)
+
+type n33bcoin_var_lib_t;
+files_type(n33bcoin_var_lib_t)
+
+type n33bcoin_var_run_t;
+files_type(n33bcoin_var_run_t)
+
+type n33bcoin_port_t;
+corenet_port(n33bcoin_port_t)
+
+########################################
+#
+# n33bcoin local policy
+#
+allow n33bcoin_t self:process { fork };
+
+allow n33bcoin_t self:fifo_file rw_fifo_file_perms;
+allow n33bcoin_t self:unix_stream_socket create_stream_socket_perms;
+
+manage_dirs_pattern(n33bcoin_t, n33bcoin_conf_t, n33bcoin_conf_t)
+manage_files_pattern(n33bcoin_t, n33bcoin_conf_t, n33bcoin_conf_t)
+
+manage_dirs_pattern(n33bcoin_t, n33bcoin_var_lib_t, n33bcoin_var_lib_t)
+manage_files_pattern(n33bcoin_t, n33bcoin_var_lib_t, n33bcoin_var_lib_t)
+files_var_lib_filetrans(n33bcoin_t, n33bcoin_var_lib_t, { dir file })
+
+manage_dirs_pattern(n33bcoin_t, n33bcoin_var_run_t, n33bcoin_var_run_t)
+manage_files_pattern(n33bcoin_t, n33bcoin_var_run_t, n33bcoin_var_run_t)
+
+sysnet_dns_name_resolve(n33bcoin_t)
+corenet_all_recvfrom_unlabeled(n33bcoin_t)
+
+allow n33bcoin_t self:tcp_socket create_stream_socket_perms;
+corenet_tcp_sendrecv_generic_if(n33bcoin_t)
+corenet_tcp_sendrecv_generic_node(n33bcoin_t)
+corenet_tcp_sendrecv_all_ports(n33bcoin_t)
+corenet_tcp_bind_generic_node(n33bcoin_t)
+
+gen_require(`
+    type n33bcoin_port_t;
+')
+allow n33bcoin_t n33bcoin_port_t:tcp_socket name_bind;
+
+gen_require(`
+    type n33bcoin_port_t;
+')
+allow n33bcoin_t n33bcoin_port_t:tcp_socket name_connect;
+
+domain_use_interactive_fds(n33bcoin_t)
+
+files_read_etc_files(n33bcoin_t)
+
+miscfiles_read_localization(n33bcoin_t)
+
+sysnet_dns_name_resolve(n33bcoin_t)
+
+allow n33bcoin_t n33bcoin_exec_t:file execute_no_trans;
+allow n33bcoin_t self:process setsched;
+corecmd_exec_ls(n33bcoin_t)
+corenet_tcp_connect_http_port(n33bcoin_t)
+dev_read_urand(n33bcoin_t)
+fs_getattr_xattr_fs(n33bcoin_t)
+kernel_read_system_state(n33bcoin_t)
