@@ -796,5 +796,4 @@ This setup gives us:
 
 ### LXD Quick Container Setup
 
-The Reminder of this tut is on [completenoobs.com - the downloadable wiki](https://www.completenoobs.com/noobs/N33Bcoin)
-
+The rest of this tut is on [completenoobs.com - the downloadable wiki](https://www.completenoobs.com/noobs/N33Bcoin)
